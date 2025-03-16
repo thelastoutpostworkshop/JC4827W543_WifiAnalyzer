@@ -90,11 +90,7 @@ void loop()
     int16_t height, offset, text_width;
 
     // WiFi.scanNetworks will return the number of networks found
-#if defined(ESP32)
     int n = WiFi.scanNetworks(false /* async */, true /* show_hidden */, true /* passive */, 500 /* max_ms_per_chan */);
-#else
-    int n = WiFi.scanNetworks(false /* async */, true /* show_hidden */);
-#endif
 
     // clear old graph
     gfx->fillRect(0, banner_height, w, h - banner_height, RGB565_BLACK);
@@ -226,11 +222,7 @@ void loop()
                 gfx->print('(');
                 gfx->print(rssi);
                 gfx->print(')');
-#if defined(ESP32)
                 if (WiFi.encryptionType(i) == WIFI_AUTH_OPEN)
-#else
-                if (WiFi.encryptionType(i) == ENC_TYPE_NONE)
-#endif
                 {
                     gfx->print('*');
                 }
@@ -293,25 +285,4 @@ void loop()
 
     // Wait a bit before scanning again
     delay(SCAN_INTERVAL);
-
-#if defined(SCAN_COUNT_SLEEP)
-    // POWER SAVING
-    if (++scan_count >= SCAN_COUNT_SLEEP)
-    {
-#if defined(LCD_PWR_PIN)
-        pinMode(LCD_PWR_PIN, INPUT); // disable pin
-#endif
-
-#if defined(GFX_BL)
-        pinMode(GFX_BL, INPUT); // disable pin
-#endif
-
-#if defined(ESP32)
-        esp_sleep_enable_ext0_wakeup(GPIO_NUM_36, LOW);
-        esp_deep_sleep_start();
-#else
-        ESP.deepSleep(0);
-#endif
-    }
-#endif // defined(SCAN_COUNT_SLEEP)
 }
