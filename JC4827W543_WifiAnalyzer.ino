@@ -2,6 +2,9 @@
  * ESP WiFi Analyzer
  * Adapted for the JC4827W543 development board from the example provided in https://github.com/moononournation/Arduino_GFX
  */
+
+// Use board "ESP32S3 Dev Module" (last tested on v3.1.3)
+// Install "Dev Device Pins" with the Library Manager (last tested on v0.0.2)
 #include <PINS_JC4827W543.h> // Install "GFX Library for Arduino" with the Library Manager (last tested on v1.5.5)
 
 #define SCAN_INTERVAL 3000
