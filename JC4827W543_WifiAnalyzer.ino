@@ -6,15 +6,9 @@
 // Use board "ESP32S3 Dev Module" (last tested on v3.1.3)
 // Install "Dev Device Pins" with the Library Manager (last tested on v0.0.2)
 #include <PINS_JC4827W543.h> // Install "GFX Library for Arduino" with the Library Manager (last tested on v1.5.5)
+#include "WiFi.h"
 
 #define SCAN_INTERVAL 3000
-
-#if defined(ESP32)
-#include "WiFi.h"
-#else
-#include "ESP8266WiFi.h"
-#define log_i(format, ...) Serial.printf(format, ##__VA_ARGS__)
-#endif
 
 int16_t w, h, text_size, banner_height, graph_baseline, graph_height, channel_width, signal_width;
 
@@ -31,13 +25,11 @@ uint8_t scan_count = 0;
 
 void setup()
 {
-#ifdef DEV_DEVICE_INIT
-  DEV_DEVICE_INIT();
-#endif
+// #ifdef DEV_DEVICE_INIT
+//   DEV_DEVICE_INIT();
+// #endif
 
   Serial.begin(115200);
-  // Serial.setDebugOutput(true);
-  // while(!Serial);
   Serial.println("Arduino_GFX ESP WiFi Analyzer example");
 
   // Set WiFi to station mode and disconnect from an AP if it was previously connected
@@ -45,10 +37,10 @@ void setup()
   WiFi.disconnect();
   delay(100);
 
-#if defined(LCD_PWR_PIN)
-  pinMode(LCD_PWR_PIN, OUTPUT);    // sets the pin as output
-  digitalWrite(LCD_PWR_PIN, HIGH); // power on
-#endif
+// #if defined(LCD_PWR_PIN)
+//   pinMode(LCD_PWR_PIN, OUTPUT);    // sets the pin as output
+//   digitalWrite(LCD_PWR_PIN, HIGH); // power on
+// #endif
 
 #ifdef GFX_BL
   pinMode(GFX_BL, OUTPUT);
@@ -74,7 +66,7 @@ void setup()
   gfx->fillScreen(RGB565_BLACK);
   gfx->setTextColor(RGB565_RED);
   gfx->setCursor(0, 0);
-  gfx->print("ESP");
+  gfx->print("ESP32-S3");
   gfx->setTextColor(RGB565_WHITE);
   gfx->print(" WiFi Analyzer");
 }
