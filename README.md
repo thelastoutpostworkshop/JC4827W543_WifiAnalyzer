@@ -5,4 +5,4 @@
 </a>
 
 ## Youtube Tutorial
-[<img src="https://github.com/thelastoutpostworkshop/images/blob/main/Wiring%20Included-1.png" width="300">](https://youtu.be/mnOzfRFQJIM)
+[<img src="https://github.com/thelastoutpostworkshop/images/blob/main/Wiring%20Included-1.png" width="500">](https://youtu.be/mnOzfRFQJIM)
